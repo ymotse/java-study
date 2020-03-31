@@ -1,7 +1,7 @@
 package estudos;
 // As variveis podem ter seus dados armazenados, alterados.
 // Ja as constantes n�o podem ter alteracao, depois de declaradas.
-public class variaveisEconstantes {
+public class VariaveisEconstantes {
 	public static void main(String[] args) {
 
 		

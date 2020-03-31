@@ -1,7 +1,7 @@
 package estudos;
 import java.util.Scanner;
 import java.util.ArrayList;
-public class while_ {
+public class While_ {
 public static void main(String[]args){
 	System.out.println("Digite qualquer Nome (para sair digite 'SAIR'): ");
 	
