@@ -26,6 +26,12 @@ public class CarroTeste {
 		
 		ferrari.acelerar();
 		System.out.println(ferrari);
+		
+		ferrari.acelerar();
+		System.out.println(ferrari);
+		
+		ferrari.acelerar();
+		System.out.println(ferrari);
 	}
 	
 }
