@@ -22,6 +22,8 @@ public class CarroTeste {
 		ferrari.acelerar();
 		System.out.println(ferrari);
 		
+		System.out.println("ferrari.velocidadeDoAr: " + ferrari.velocidadeDoAr());
+		
 		ferrari.acelerar();
 		System.out.println(ferrari);
 		
