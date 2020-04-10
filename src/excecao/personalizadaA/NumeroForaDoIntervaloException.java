@@ -1,4 +1,4 @@
-package excecao;
+package excecao.personalizadaA;
 
 @SuppressWarnings("serial")
 public class NumeroForaDoIntervaloException extends RuntimeException {
