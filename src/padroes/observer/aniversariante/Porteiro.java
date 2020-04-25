@@ -1,4 +1,4 @@
-package observer.aniversariante;
+package padroes.observer.aniversariante;
 
 import java.util.ArrayList;
 import java.util.Date;

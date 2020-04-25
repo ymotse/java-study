@@ -1,4 +1,4 @@
-package observer.aniversariante;
+package padroes.observer.aniversariante;
 
 public class Namorada implements ChegadaAniversarianteObserver {
 
