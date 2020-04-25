@@ -10,11 +10,10 @@ public class ParesTeste {
 		resultadoConcurso.adicionar(3, "Gui");
 		resultadoConcurso.adicionar(4, "Ana");
 		resultadoConcurso.adicionar(2, "Rebeca");
-		resultadoConcurso.adicionar(6, "Paulo");
 		
 		System.out.println(resultadoConcurso.getValor(1));
-		System.out.println(resultadoConcurso.getValor(2));
 		System.out.println(resultadoConcurso.getValor(4));
+		System.out.println(resultadoConcurso.getValor(2));
 		
 	}
 	
