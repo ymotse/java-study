@@ -20,7 +20,6 @@ public class CriarTabelaPessoas {
 		
 		System.out.println("Tabela criada com sucesso!");
 		conexao.close();
-		
 	}
 	
 }
