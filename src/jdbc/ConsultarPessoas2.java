@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ConsultarPessoa2 {
+public class ConsultarPessoas2 {
 	
 	public static void main(String[] args) throws SQLException {
 		Scanner entrada = new Scanner(System.in);
