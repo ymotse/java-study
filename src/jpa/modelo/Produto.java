@@ -1,35 +1,35 @@
-package jpaModelo;
+package jpa.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Usuario {
+@Table(name = "produtos")
+public class Produto {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "nome")
+	@Column(name = "nome", length = 200, nullable = false)
 	private String nome;
 	
-	@Column(name = "email")
-	private String email;
+	@Column(name = "preco", nullable = false, precision = 11, scale = 2)
+	private Double preco;
 	
-	public Usuario() {
+	public Produto() {
 		
 	}
 
-	public Usuario(String nome, String email) {
-		super();
+	public Produto(String nome, Double preco) {
 		this.nome = nome;
-		this.email = email;
+		this.preco = preco;
 	}
 
-	
 	public Long getId() {
 		return id;
 	}
@@ -46,12 +46,12 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public String getEmail() {
-		return email;
+	public Double getPreco() {
+		return preco;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
 	
 }

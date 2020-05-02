@@ -1,12 +1,12 @@
-package jpaModelo.testes;
+package jpa.testes;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import jpaModelo.Usuario;
+import jpa.modelo.Usuario;
 
-public class AlterarUsuario1 {
+public class AlterarUsuario2 {
 	
 	public static void main(String[] args) {
 		
@@ -16,10 +16,9 @@ public class AlterarUsuario1 {
 		em.getTransaction().begin();
 		
 		Usuario usuario = em.find(Usuario.class, 8L);
-		usuario.setNome("Isaac");
-		usuario.setEmail("isaac@lanche.com.br");
+		usuario.setNome("Isaac Correa");
 		
-		em.merge(usuario);
+//		em.merge(usuario);
 		
 		em.getTransaction().commit();
 		

@@ -1,20 +1,25 @@
-package jpaModelo.testes;
+package jpa.testes;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import jpaModelo.Usuario;
+import jpa.modelo.Usuario;
 
-public class ObterUsuario {
-
+public class NovoUsuario {
+	
 	public static void main(String[] args) {
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("java-estudos");
 		EntityManager em = emf.createEntityManager();
 		
-		Usuario usuario = em.find(Usuario.class, 8L);
-		System.out.println(usuario.getNome());
+		Usuario novoUsuario = new Usuario("Isac", "isac@lanche.com.br");
+		
+		em.getTransaction().begin();
+		em.persist(novoUsuario);
+		em.getTransaction().commit();
+		
+		System.out.println("O Id gerado foi: " + novoUsuario.getId());
 		
 		em.close();
 		emf.close();

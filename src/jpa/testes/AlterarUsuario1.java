@@ -1,12 +1,12 @@
-package jpaModelo.testes;
+package jpa.testes;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import jpaModelo.Usuario;
+import jpa.modelo.Usuario;
 
-public class AlterarUsuario3 {
+public class AlterarUsuario1 {
 	
 	public static void main(String[] args) {
 		
@@ -17,9 +17,7 @@ public class AlterarUsuario3 {
 		
 		Usuario usuario = em.find(Usuario.class, 8L);
 		usuario.setNome("Isaac");
-
-		//Estado nao gerenciado:
-		em.detach(usuario);
+		usuario.setEmail("isaac@lanche.com.br");
 		
 		em.merge(usuario);
 		
@@ -28,6 +26,5 @@ public class AlterarUsuario3 {
 		em.close();
 		emf.close();
 	}
-	
 	
 }

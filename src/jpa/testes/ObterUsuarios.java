@@ -1,4 +1,4 @@
-package jpaModelo.testes;
+package jpa.testes;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import jpaModelo.Usuario;
+import jpa.modelo.Usuario;
 
 public class ObterUsuarios {
 	

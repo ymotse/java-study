@@ -1,26 +1,27 @@
-package jpaModelo.testes;
+package jpa.testes;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import jpaModelo.Usuario;
+import jpa.modelo.Usuario;
 
-public class AlterarUsuario2 {
+public class RemoverUsuario {
 	
 	public static void main(String[] args) {
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("java-estudos");
 		EntityManager em = emf.createEntityManager();
 		
-		em.getTransaction().begin();
+		Usuario usuario = em.find(Usuario.class, 6L);
 		
-		Usuario usuario = em.find(Usuario.class, 8L);
-		usuario.setNome("Isaac Correa");
-		
-//		em.merge(usuario);
-		
-		em.getTransaction().commit();
+		if(usuario != null) {
+			em.getTransaction().begin();
+			em.remove(usuario);
+			em.getTransaction().commit();
+		} else {
+			System.out.println("Usuário não encontrado para exclusão.");
+		}
 		
 		em.close();
 		emf.close();
