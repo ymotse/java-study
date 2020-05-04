@@ -9,6 +9,8 @@
         <class>jpa.modelo.Produto</class>
         <class>jpa.modelo.umpraum.Assento</class>
         <class>jpa.modelo.umpraum.Cliente</class>
+        <class>jpa.modelo.umpramuitos.Pedido</class>
+        <class>jpa.modelo.umpramuitos.ItemPedido</class>
         
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
