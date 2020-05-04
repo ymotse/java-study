@@ -13,6 +13,8 @@
         <class>jpa.modelo.umpramuitos.ItemPedido</class>
         <class>jpa.modelo.muitospramuitos.Sobrinho</class>
         <class>jpa.modelo.muitospramuitos.Tio</class>
+        <class>jpa.modelo.muitospramuitos.Filme</class>
+        <class>jpa.modelo.muitospramuitos.Ator</class>
         
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
