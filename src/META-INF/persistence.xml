@@ -11,6 +11,8 @@
         <class>jpa.modelo.umpraum.Cliente</class>
         <class>jpa.modelo.umpramuitos.Pedido</class>
         <class>jpa.modelo.umpramuitos.ItemPedido</class>
+        <class>jpa.modelo.muitospramuitos.Sobrinho</class>
+        <class>jpa.modelo.muitospramuitos.Tio</class>
         
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
