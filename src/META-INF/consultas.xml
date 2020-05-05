@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+        version="2.2">
+
+	<named-query name="filmesNotaMaiorQue">
+		<query>
+			SELECT DISTINCT f FROM Filme f 
+			JOIN FETCH f.atores 
+			WHERE f.nota > :nota
+		</query>
+	</named-query>
+
+</entity-mappings>
