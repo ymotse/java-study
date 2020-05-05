@@ -18,6 +18,9 @@
         <class>jpa.modelo.muitospramuitos.Tio</class>
         <class>jpa.modelo.muitospramuitos.Filme</class>
         <class>jpa.modelo.muitospramuitos.Ator</class>
+        <class>jpa.modelo.composicao.Endereco</class>
+        <class>jpa.modelo.composicao.Fornecedor</class>
+        <class>jpa.modelo.composicao.Funcionario</class>
         
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
