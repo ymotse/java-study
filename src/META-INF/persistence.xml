@@ -21,6 +21,8 @@
         <class>jpa.modelo.composicao.Endereco</class>
         <class>jpa.modelo.composicao.Fornecedor</class>
         <class>jpa.modelo.composicao.Funcionario</class>
+        <class>jpa.modelo.heranca.Aluno</class>
+        <class>jpa.modelo.heranca.AlunoBolsista</class>
         
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
