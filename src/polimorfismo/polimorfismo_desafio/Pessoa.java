@@ -23,8 +23,10 @@ public class Pessoa {
 	
 	
 	// Polimorfismo Dinamico:
-	public void comer(Comida comida) {
-		this.peso += comida.getPeso();
+	public void comer(Comida... comidas) {
+		for (Comida comida : comidas) {
+			this.peso += comida.getPeso();
+		}
 	}
 	
 	

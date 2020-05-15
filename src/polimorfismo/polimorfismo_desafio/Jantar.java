@@ -9,8 +9,7 @@ public class Jantar {
 		Arroz arroz = new Arroz(0.1);
 		Feijao feijao = new Feijao(0.2);
 		
-		convidado.comer(arroz);
-		convidado.comer(feijao);
+		convidado.comer(arroz, feijao);
 
 		System.out.println(convidado.getPeso());
 		
