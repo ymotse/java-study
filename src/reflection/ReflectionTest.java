@@ -4,6 +4,9 @@ import java.util.Map;
 
 public class ReflectionTest {
 
+	
+	// fonte do exemplo: http://blog.gabrielamorim.com/java-reflection-um-exemplo-pratico/
+	
 	public static void main(String[] args) {
 
 		Person person = new Person();
