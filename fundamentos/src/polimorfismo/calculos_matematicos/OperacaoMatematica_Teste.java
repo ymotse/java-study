@@ -1,4 +1,4 @@
-package polimorfismo;
+package polimorfismo.calculos_matematicos;
 
 public class OperacaoMatematica_Teste {
 
@@ -9,18 +9,15 @@ public class OperacaoMatematica_Teste {
 	public static void calculeSemPolimorfismo(String o, double x, double y) {
 		if(o.equals("Soma")) {
 			System.out.println(x + y);
-		}else if(o.equals("Multiplicacao")) {
+		} else if(o.equals("Multiplicacao")) {
 			System.out.println(x * y);
 		}
 	}
 	
 	public static void main(String[] args) {
-		
 		calcule(new Soma(), 5, 7);
-		
 		calcule(new Multiplicacao(), 4, 2);
 		
 		calculeSemPolimorfismo("Soma", 5, 2);
 	}
-
 }

@@ -1,6 +1,6 @@
 package polimorfismo.polimorfismo_desafio;
 
-public class Jantar {
+public class Jantar_Teste {
 	
 	public static void main(String[] args) {
 		
