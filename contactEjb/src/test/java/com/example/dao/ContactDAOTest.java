@@ -59,4 +59,41 @@ public class ContactDAOTest extends TestCase {
         Assert.assertNull(contactDAO.save(null));
     }
     
+    @Test
+    public void update_returnsContact_whenSuccessful() throws Exception {
+        contactDAO.save(ContactCreator.createContactToBeSaved());
+        
+        Contact contactToBeValidate = ContactCreator.createContactToBeValidate();
+        
+        Mockito.when(em.find(Contact.class, 1L)).thenReturn(contactToBeValidate);
+        Mockito.when(em.merge(ArgumentMatchers.any(Contact.class))).thenReturn(contactToBeValidate);
+        
+        Contact contactUpdated = contactDAO.update(contactToBeValidate);
+        
+        Assert.assertNotNull(contactUpdated);
+        Assert.assertEquals(contactToBeValidate, contactUpdated);
+    }
+    
+    @Test
+    public void update_returnsNull_whenContactIsEmpty() throws Exception {
+        Assert.assertNull(contactDAO.update(new Contact()));
+    }
+    
+    @Test(expected = Exception.class)
+    public void update_throwsException_whenContactIsNotFound() throws Exception {
+        Contact contactToBeValidate = ContactCreator.createContactToBeValidate();
+        
+        Mockito.when(em.find(Contact.class, Long.MAX_VALUE)).thenThrow(Exception.class);
+        
+        Assert.assertEquals(Exception.class, contactDAO.update(contactToBeValidate));
+        Assert.assertEquals(new Exception(), contactDAO.update(contactToBeValidate));
+    }
+    
+    @Test(expected = NullPointerException.class)
+    public void update_throwsNullPointerException_whenContactIsNull() throws Exception {
+        Assert.assertEquals(NullPointerException.class, contactDAO.update(null));
+        Assert.assertEquals(new NullPointerException(), contactDAO.update(null));
+        Assert.assertNull(contactDAO.update(null));
+    }
+    
 }
