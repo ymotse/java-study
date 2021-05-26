@@ -65,7 +65,7 @@ public class ContactDAOTest extends TestCase {
         
         Contact contactToBeValidate = ContactCreator.createContactToBeValidate();
         
-        Mockito.when(em.find(Contact.class, 1L)).thenReturn(contactToBeValidate);
+        Mockito.when(em.find(Mockito.eq(Contact.class), Mockito.anyLong())).thenReturn(contactToBeValidate);
         Mockito.when(em.merge(ArgumentMatchers.any(Contact.class))).thenReturn(contactToBeValidate);
         
         Contact contactUpdated = contactDAO.update(contactToBeValidate);
@@ -94,6 +94,18 @@ public class ContactDAOTest extends TestCase {
         Assert.assertEquals(NullPointerException.class, contactDAO.update(null));
         Assert.assertEquals(new NullPointerException(), contactDAO.update(null));
         Assert.assertNull(contactDAO.update(null));
+    }
+    
+    @Test
+    public void findById_returnsContact_whenSuccessful() throws Exception {
+        Mockito.when(em.find(Mockito.eq(Contact.class), Mockito.anyLong())).thenReturn(ContactCreator.createContactToBeValidate());
+        
+        Contact contactExpected = ContactCreator.createContactToBeValidate();
+        
+        Contact contactFinded = contactDAO.findById(1L);
+        
+        Assert.assertNotNull(contactFinded);
+        Assert.assertEquals(contactExpected, contactFinded);
     }
     
 }
