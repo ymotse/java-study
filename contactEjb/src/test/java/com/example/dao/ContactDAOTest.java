@@ -102,10 +102,19 @@ public class ContactDAOTest extends TestCase {
         
         Contact contactExpected = ContactCreator.createContactToBeValidate();
         
-        Contact contactFinded = contactDAO.findById(1L);
+        Contact contactFinded = contactDAO.findById(Long.MAX_VALUE);
         
         Assert.assertNotNull(contactFinded);
         Assert.assertEquals(contactExpected, contactFinded);
+    }
+    
+    @Test
+    public void remove_removesContact_whenSuccessful() throws Exception {
+        Mockito.when(em.find(Mockito.eq(Contact.class), Mockito.anyLong())).thenReturn(ContactCreator.createContactToBeValidate());
+        
+        Mockito.doNothing().when(em).remove(ContactCreator.createContactToBeValidate());
+        
+        contactDAO.remove(Long.MAX_VALUE);
     }
     
 }
