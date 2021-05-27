@@ -5,15 +5,14 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.mockito.ArgumentMatchers;
+import static org.mockito.ArgumentMatchers.*;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import static org.mockito.Mockito.*;
+import static org.mockito.MockitoAnnotations.*;
 
 import com.example.ContactCreator;
 import com.example.model.Contact;
@@ -30,9 +29,9 @@ public class ContactDAOTest extends TestCase {
     
     @Before
     public void init() {
-        MockitoAnnotations.initMocks(this);
+        initMocks(this);
 
-        em = Mockito.mock(EntityManager.class);
+        em = mock(EntityManager.class);
 
         contactDAO = new ContactDAO(em);
     }
@@ -41,25 +40,25 @@ public class ContactDAOTest extends TestCase {
     public void persist_returnsContact_whenSuccessful() throws Exception {
         Contact contactToBeSaved = ContactCreator.createContactToBeSaved();
 
-        Mockito.doNothing().when(em).persist(contactToBeSaved);
+        doNothing().when(em).persist(contactToBeSaved);
 
         Contact contactSaved = contactDAO.save(contactToBeSaved);
 
-        Assert.assertNotNull(contactSaved);
-        Assert.assertEquals(contactToBeSaved.getName(), contactSaved.getName());
+        assertNotNull(contactSaved);
+        assertEquals(contactToBeSaved.getName(), contactSaved.getName());
     }
     
     @Test
     public void persist_returnsNull_whenIdIsNull() throws Exception {
-        Assert.assertNull(contactDAO.save(ContactCreator.createContactToBeValidate()));
+        assertNull(contactDAO.save(ContactCreator.createContactToBeValidate()));
     }
     
     @Test(expected = NullPointerException.class)
     public void persist_throwsNullPointerException_whenContactIsNull() {
-        Mockito.doThrow(new NullPointerException()).when(em).persist(ArgumentMatchers.any(Contact.class));
+        doThrow(new NullPointerException()).when(em).persist(any(Contact.class));
         
-        Assert.assertEquals(new NullPointerException(), contactDAO.save(new Contact()));
-        Assert.assertNull(contactDAO.save(null));
+        assertEquals(new NullPointerException(), contactDAO.save(new Contact()));
+        assertNull(contactDAO.save(null));
     }
     
     @Test
@@ -68,73 +67,73 @@ public class ContactDAOTest extends TestCase {
         
         Contact contactToBeValidate = ContactCreator.createContactToBeValidate();
         
-        Mockito.when(em.find(Mockito.eq(Contact.class), Mockito.anyLong())).thenReturn(contactToBeValidate);
-        Mockito.when(em.merge(ArgumentMatchers.any(Contact.class))).thenReturn(contactToBeValidate);
+        when(em.find(eq(Contact.class), anyLong())).thenReturn(contactToBeValidate);
+        when(em.merge(any(Contact.class))).thenReturn(contactToBeValidate);
         
         Contact contactUpdated = contactDAO.update(contactToBeValidate);
         
-        Assert.assertNotNull(contactUpdated);
-        Assert.assertEquals(contactToBeValidate, contactUpdated);
+        assertNotNull(contactUpdated);
+        assertEquals(contactToBeValidate, contactUpdated);
     }
     
     @Test
     public void update_returnsNull_whenContactIsEmpty() throws Exception {
-        Assert.assertNull(contactDAO.update(new Contact()));
+        assertNull(contactDAO.update(new Contact()));
     }
     
     @Test(expected = Exception.class)
     public void update_throwsException_whenContactIsNotFound() throws Exception {
         Contact contactToBeValidate = ContactCreator.createContactToBeValidate();
         
-        Mockito.when(em.find(Contact.class, Long.MAX_VALUE)).thenThrow(Exception.class);
+        when(em.find(Contact.class, Long.MAX_VALUE)).thenThrow(Exception.class);
         
-        Assert.assertEquals(Exception.class, contactDAO.update(contactToBeValidate));
-        Assert.assertEquals(new Exception(), contactDAO.update(contactToBeValidate));
+        assertEquals(Exception.class, contactDAO.update(contactToBeValidate));
+        assertEquals(new Exception(), contactDAO.update(contactToBeValidate));
     }
     
     @Test(expected = NullPointerException.class)
     public void update_throwsNullPointerException_whenContactIsNull() throws Exception {
-        Assert.assertEquals(NullPointerException.class, contactDAO.update(null));
-        Assert.assertEquals(new NullPointerException(), contactDAO.update(null));
-        Assert.assertNull(contactDAO.update(null));
+        assertEquals(NullPointerException.class, contactDAO.update(null));
+        assertEquals(new NullPointerException(), contactDAO.update(null));
+        assertNull(contactDAO.update(null));
     }
     
     @Test
     public void findById_returnsContact_whenSuccessful() throws Exception {
-        Mockito.when(em.find(Mockito.eq(Contact.class), Mockito.anyLong())).thenReturn(ContactCreator.createContactToBeValidate());
+        when(em.find(eq(Contact.class), anyLong())).thenReturn(ContactCreator.createContactToBeValidate());
         
         Contact contactExpected = ContactCreator.createContactToBeValidate();
         
         Contact contactFinded = contactDAO.findById(Long.MAX_VALUE);
         
-        Assert.assertNotNull(contactFinded);
-        Assert.assertEquals(contactExpected, contactFinded);
+        assertNotNull(contactFinded);
+        assertEquals(contactExpected, contactFinded);
     }
     
     @Test
     public void remove_removesContact_whenSuccessful() throws Exception {
-        Mockito.when(em.find(Mockito.eq(Contact.class), Mockito.anyLong())).thenReturn(ContactCreator.createContactToBeValidate());
+        when(em.find(eq(Contact.class), anyLong())).thenReturn(ContactCreator.createContactToBeValidate());
         
-        Mockito.doNothing().when(em).remove(ContactCreator.createContactToBeValidate());
+        doNothing().when(em).remove(ContactCreator.createContactToBeValidate());
         
         contactDAO.remove(Long.MAX_VALUE);
     }
     
     @Test
     public void findByListId_returnsContactList_whenSuccessful() throws Exception {
-        Query queryMock = Mockito.mock(Query.class);
+        Query queryMock = mock(Query.class);
 
         String queryString = "SELECT id, name, TO_CHAR(birth_date, 'dd/mm/yyyy'), email FROM contact WHERE id IN (:ids)";
 
-        Mockito.when(em.createNativeQuery(queryString)).thenReturn(queryMock);
-        Mockito.when(queryMock.getResultList()).thenReturn(ContactCreator.createTwoObjectContactsInList());
+        when(em.createNativeQuery(queryString)).thenReturn(queryMock);
+        when(queryMock.getResultList()).thenReturn(ContactCreator.createTwoObjectContactsInList());
 
-        List<Contact> contacts = contactDAO.findByListId(Mockito.anyList());
+        List<Contact> contacts = contactDAO.findByListId(anyList());
 
-        Assert.assertNotNull(contacts);
-        Assert.assertEquals(ContactCreator.createTwoContactsInListToBeValidate(), contacts);
-        Assert.assertEquals(ContactCreator.createTwoContactsInListToBeValidate().get(0), contacts.get(0));
-        Assert.assertNull(contacts.get(1).getEmail());
+        assertNotNull(contacts);
+        assertEquals(ContactCreator.createTwoContactsInListToBeValidate(), contacts);
+        assertEquals(ContactCreator.createTwoContactsInListToBeValidate().get(0), contacts.get(0));
+        assertNull(contacts.get(1).getEmail());
     }
     
 }
