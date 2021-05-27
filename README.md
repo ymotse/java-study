@@ -1,5 +1,3 @@
-JDK13
+🤓 Project used to study fundamentals, logic, tests, and object oriented programming in Java.
 
-Fundamentos, lógica e orientação a objetos.
 
-:smile: 
