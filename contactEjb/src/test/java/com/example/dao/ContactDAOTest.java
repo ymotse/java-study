@@ -1,6 +1,9 @@
 package com.example.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -115,6 +118,23 @@ public class ContactDAOTest extends TestCase {
         Mockito.doNothing().when(em).remove(ContactCreator.createContactToBeValidate());
         
         contactDAO.remove(Long.MAX_VALUE);
+    }
+    
+    @Test
+    public void findByListId_returnsContactList_whenSuccessful() throws Exception {
+        Query queryMock = Mockito.mock(Query.class);
+
+        String queryString = "SELECT id, name, TO_CHAR(birth_date, 'dd/mm/yyyy'), email FROM contact WHERE id IN (:ids)";
+
+        Mockito.when(em.createNativeQuery(queryString)).thenReturn(queryMock);
+        Mockito.when(queryMock.getResultList()).thenReturn(ContactCreator.createTwoObjectContactsInList());
+
+        List<Contact> contacts = contactDAO.findByListId(Mockito.anyList());
+
+        Assert.assertNotNull(contacts);
+        Assert.assertEquals(ContactCreator.createTwoContactsInListToBeValidate(), contacts);
+        Assert.assertEquals(ContactCreator.createTwoContactsInListToBeValidate().get(0), contacts.get(0));
+        Assert.assertNull(contacts.get(1).getEmail());
     }
     
 }
