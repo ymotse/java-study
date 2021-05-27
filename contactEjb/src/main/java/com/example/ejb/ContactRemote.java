@@ -1,5 +1,7 @@
 package com.example.ejb;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
 import com.example.model.Contact;
@@ -14,4 +16,6 @@ public interface ContactRemote {
     public Contact findById(Long id);
 
     public void remove(Long id);
+    
+    public List<Contact> findByListId(List<Long> listId) throws Exception;
 }

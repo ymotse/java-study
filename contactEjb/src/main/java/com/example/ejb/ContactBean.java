@@ -1,5 +1,7 @@
 package com.example.ejb;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -35,6 +37,12 @@ public class ContactBean implements ContactRemote {
     public void remove(Long id) {
         ContactDAO contactDAO = new ContactDAO(em);
         contactDAO.remove(id);
+    }
+
+    @Override
+    public List<Contact> findByListId(List<Long> listId) throws Exception {
+        ContactDAO contactDAO = new ContactDAO(em);
+        return contactDAO.findByListId(listId);
     }
 
 }
