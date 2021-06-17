@@ -9,6 +9,10 @@ import static org.junit.Assert.fail;
 
 import java.util.Date;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -22,18 +26,45 @@ import locadora.utils.DataUtils;
 
 public class LocacaoServiceTest {
     
+    LocacaoService locacaoService;
+    
+    private static int contador = 0;
+
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
+    
+    @BeforeClass
+    public static void setupClass() {
+        System.out.println("Before class.");
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+        System.out.println("After class.");
+    }
+
+    @Before
+    public void setup() {
+        contador++;
+        System.out.println("Test: " + contador);
+        
+        locacaoService = new LocacaoService();
+    }
+    
+    @After
+    public void tearDown() {
+        System.out.println("After test " + contador);
+    }
+    
     
     @Test
     public void alugarFilme_retornaLocacao_quandoBemSucedido() throws Exception {
         //# cenario:
-        LocacaoService service = new LocacaoService();
         Usuario usuario = new Usuario("Usuario 1");
         Filme filme = new Filme("Filme 1", 1, 5.0);
         
         //# acao:
-        Locacao locacao = service.alugarFilme(usuario, filme);
+        Locacao locacao = locacaoService.alugarFilme(usuario, filme);
 
         //# verificacao:
         assertTrue(locacao.getValor() == 5.0);
@@ -48,17 +79,15 @@ public class LocacaoServiceTest {
     
     @Test(expected = FilmeSemEstoqueException.class)
     public void alugarFilme_esperadoExcecao_quandoFilmeSemEstoque() throws Exception {
-        LocacaoService service = new LocacaoService();
         Usuario usuario = new Usuario("Usuario 1");
         Filme filme = new Filme("Filme 1", 0, 5.0);
         
-        service.alugarFilme(usuario, filme);
+        locacaoService.alugarFilme(usuario, filme);
     }
     
     @Test
     public void alugarFilme_retornaExcecao_quandoUsuarioVazio() throws FilmeSemEstoqueException {
         //#cenario
-        LocacaoService locacaoService = new LocacaoService();
         Filme filme = new Filme("Filme 2", 1, 4.0);
         
         //#acao
@@ -73,7 +102,6 @@ public class LocacaoServiceTest {
     @Test
     public void alugarFilme_retornaExcecao_quandoFilmeVazio() throws LocadoraException, FilmeSemEstoqueException {
         //#cenario
-        LocacaoService locacaoService = new LocacaoService();
         Usuario usuario = new Usuario("Usuário 1");
         
         expectedException.expect(LocadoraException.class);
