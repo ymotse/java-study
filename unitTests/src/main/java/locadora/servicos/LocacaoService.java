@@ -3,6 +3,7 @@ package locadora.servicos;
 import static locadora.utils.DataUtils.adicionarDias;
 
 import java.util.Date;
+import java.util.List;
 
 import locadora.entidades.Filme;
 import locadora.entidades.Locacao;
@@ -12,14 +13,16 @@ import locadora.excecoes.LocadoraException;
 
 public class LocacaoService {
 
-    public Locacao alugarFilme(Usuario usuario, Filme filme) throws LocadoraException, FilmeSemEstoqueException {
+    public Locacao alugarFilme(Usuario usuario, List<Filme> filmes) throws LocadoraException, FilmeSemEstoqueException {
         
-        if(filme == null) {
-            throw new LocadoraException("Filme vazio");
+        if(filmes == null || filmes.isEmpty()) {
+            throw new LocadoraException("Filmes vazios");
         }
 
-        if(filme.getEstoque() == 0) {
-            throw new FilmeSemEstoqueException();
+        for (Filme filme : filmes) {
+            if(filme.getEstoque() == 0) {
+                throw new FilmeSemEstoqueException();
+            }
         }
         
         if(usuario == null) {
@@ -27,10 +30,15 @@ public class LocacaoService {
         }
         
         Locacao locacao = new Locacao();
-        locacao.setFilme(filme);
+        locacao.setFilme(filmes);
         locacao.setUsuario(usuario);
         locacao.setDataLocacao(new Date());
-        locacao.setValor(filme.getPrecoLocacao());
+        
+        Double precoLocacao = 0d;
+        for (Filme filme : filmes) {
+            precoLocacao += filme.getPrecoLocacao(); 
+        }
+        locacao.setValor(precoLocacao);
 
         // Entrega no dia seguinte
         Date dataEntrega = new Date();
