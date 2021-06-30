@@ -2,6 +2,7 @@ package locadora.servicos;
 
 import static locadora.utils.DataUtils.adicionarDias;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import locadora.entidades.Locacao;
 import locadora.entidades.Usuario;
 import locadora.excecoes.FilmeSemEstoqueException;
 import locadora.excecoes.LocadoraException;
+import locadora.utils.DataUtils;
 
 public class LocacaoService {
 
@@ -61,6 +63,9 @@ public class LocacaoService {
         // Entrega no dia seguinte
         Date dataEntrega = new Date();
         dataEntrega = adicionarDias(dataEntrega, 1);
+        if(DataUtils.verificarDiaSemana(dataEntrega, Calendar.SUNDAY)) {
+            dataEntrega = adicionarDias(dataEntrega, 1);
+        }
         locacao.setDataRetorno(dataEntrega);
 
         // TODO adicionar metodo para salvar locacao.
