@@ -1,5 +1,7 @@
 package locadora.servicos;
 
+import static locadora.matchers.MatchersProprios.caiEm;
+import static locadora.matchers.MatchersProprios.caiEmUmaSegunda;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,6 +30,8 @@ import locadora.entidades.Locacao;
 import locadora.entidades.Usuario;
 import locadora.excecoes.FilmeSemEstoqueException;
 import locadora.excecoes.LocadoraException;
+import locadora.matchers.DiaSemanaMatcher;
+import locadora.matchers.MatchersProprios;
 import locadora.utils.DataUtils;
 
 public class LocacaoServiceTest {
@@ -192,7 +196,9 @@ public class LocacaoServiceTest {
         
         //#verificacao
         boolean ehSegunda = DataUtils.verificarDiaSemana(retorno.getDataRetorno(), Calendar.MONDAY);
-        assertTrue(ehSegunda);
         
+        assertTrue(ehSegunda);
+        assertThat(retorno.getDataRetorno(), caiEm(Calendar.MONDAY));
+        assertThat(retorno.getDataRetorno(), caiEmUmaSegunda());
     }
 }
