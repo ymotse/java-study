@@ -25,6 +25,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import static locadora.builders.FilmeBuilder.umFilme;
+import static locadora.builders.UsuarioBuilder.umUsuario;
+
 import locadora.entidades.Filme;
 import locadora.entidades.Locacao;
 import locadora.entidades.Usuario;
@@ -73,8 +76,8 @@ public class LocacaoServiceTest {
         assumeFalse(DataUtils.verificarDiaSemana(new Date(), Calendar.SATURDAY));
         
         //# cenario:
-        Usuario usuario = new Usuario("Usuario 1");
-        List<Filme> filmes = Arrays.asList(new Filme("Filme 1", 1, 5.0)); 
+        Usuario usuario = umUsuario().agora();
+        List<Filme> filmes = Arrays.asList(umFilme().agora()); 
         
         //# acao:
         Locacao locacao = locacaoService.alugarFilme(usuario, filmes);
@@ -92,8 +95,8 @@ public class LocacaoServiceTest {
     
     @Test(expected = FilmeSemEstoqueException.class)
     public void alugarFilme_esperadoExcecao_quandoFilmeSemEstoque() throws Exception {
-        Usuario usuario = new Usuario("Usuario 1");
-        List<Filme> filmes = Arrays.asList(new Filme("Filme 1", 0, 5.0)); 
+        Usuario usuario = umUsuario().agora();
+        List<Filme> filmes = Arrays.asList(umFilme().semEstoque().agora()); 
         
         locacaoService.alugarFilme(usuario, filmes);
     }
@@ -101,7 +104,7 @@ public class LocacaoServiceTest {
     @Test
     public void alugarFilme_retornaExcecao_quandoUsuarioVazio() throws FilmeSemEstoqueException {
         //#cenario
-        List<Filme> filmes = Arrays.asList(new Filme("Filme 2", 1, 5.0)); 
+        List<Filme> filmes = Arrays.asList(umFilme().agora()); 
         
         //#acao
         try {
@@ -115,7 +118,7 @@ public class LocacaoServiceTest {
     @Test
     public void alugarFilme_retornaExcecao_quandoFilmeVazio() throws LocadoraException, FilmeSemEstoqueException {
         //#cenario
-        Usuario usuario = new Usuario("Usuário 1");
+        Usuario usuario = umUsuario().agora();
         
         expectedException.expect(LocadoraException.class);
         expectedException.expectMessage("Filmes vazios");
@@ -126,7 +129,7 @@ public class LocacaoServiceTest {
     
     @Test
     public void devePagar75porCentoNoFilme3() throws LocadoraException, FilmeSemEstoqueException {
-        Usuario usuario = new Usuario("Usuário 1");
+        Usuario usuario = umUsuario().agora();
         List<Filme> filmes = Arrays.asList(
                 new Filme("Filme 1", 2 , 4.0),
                 new Filme("Filme 2", 2 , 4.0),
@@ -139,7 +142,7 @@ public class LocacaoServiceTest {
     
     @Test
     public void devePagar50porCentoNoFilme4() throws LocadoraException, FilmeSemEstoqueException {
-        Usuario usuario = new Usuario("Usuário 2");
+        Usuario usuario = umUsuario().agora();
         List<Filme> filmes = Arrays.asList(
                 new Filme("Filme 1", 2 , 4.0),
                 new Filme("Filme 2", 2 , 4.0),
@@ -153,7 +156,7 @@ public class LocacaoServiceTest {
     
     @Test
     public void devePagar25porCentoNoFilme5() throws LocadoraException, FilmeSemEstoqueException {
-        Usuario usuario = new Usuario("Usuário 3");
+        Usuario usuario = umUsuario().agora();
         List<Filme> filmes = Arrays.asList(
                 new Filme("Filme 1", 2 , 4.0),
                 new Filme("Filme 2", 2 , 4.0),
@@ -168,7 +171,7 @@ public class LocacaoServiceTest {
     
     @Test
     public void devePagar0porCentoNoFilme6() throws LocadoraException, FilmeSemEstoqueException {
-        Usuario usuario = new Usuario("Usuário 4");
+        Usuario usuario = umUsuario().agora();
         List<Filme> filmes = Arrays.asList(
                 new Filme("Filme 1", 2 , 4.0),
                 new Filme("Filme 2", 2 , 4.0),
@@ -189,7 +192,7 @@ public class LocacaoServiceTest {
         
         //#cenario
         Usuario usuario = new Usuario("Usuário 1");
-        List<Filme> filmes = Arrays.asList(new Filme("Filme 1", 1, 5.0));
+        List<Filme> filmes = Arrays.asList(umFilme().agora());
         
         //#acao
         Locacao retorno = locacaoService.alugarFilme(usuario, filmes);
