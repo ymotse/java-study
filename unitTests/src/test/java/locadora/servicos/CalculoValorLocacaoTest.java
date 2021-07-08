@@ -17,6 +17,8 @@ import org.junit.runners.Parameterized.Parameters;
 import locadora.entidades.Filme;
 import locadora.entidades.Locacao;
 import locadora.entidades.Usuario;
+import locadora.entidades.dao.LocacaoDAO;
+import locadora.entidades.dao.LocacaoDAOFake;
 import locadora.excecoes.FilmeSemEstoqueException;
 import locadora.excecoes.LocadoraException;
 
@@ -37,6 +39,9 @@ public class CalculoValorLocacaoTest {
     @Before
     public void setup() {
         locacaoService = new LocacaoService();
+        
+        LocacaoDAO dao = new LocacaoDAOFake();
+        locacaoService.setLocacaoDAO(dao);
     }
     
     private static Filme filme1 = new Filme("Filme 1", 2, 4.0);

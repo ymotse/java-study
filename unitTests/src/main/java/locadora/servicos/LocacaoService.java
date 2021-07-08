@@ -9,12 +9,15 @@ import java.util.List;
 import locadora.entidades.Filme;
 import locadora.entidades.Locacao;
 import locadora.entidades.Usuario;
+import locadora.entidades.dao.LocacaoDAO;
 import locadora.excecoes.FilmeSemEstoqueException;
 import locadora.excecoes.LocadoraException;
 import locadora.utils.DataUtils;
 
 public class LocacaoService {
-
+    
+    private LocacaoDAO dao;
+    
     public Locacao alugarFilme(Usuario usuario, List<Filme> filmes) throws LocadoraException, FilmeSemEstoqueException {
         
         if(filmes == null || filmes.isEmpty()) {
@@ -69,8 +72,13 @@ public class LocacaoService {
         locacao.setDataRetorno(dataEntrega);
 
         // TODO adicionar metodo para salvar locacao.
+        dao.salvar(locacao);
 
         return locacao;
+    }
+    
+    public void setLocacaoDAO(LocacaoDAO dao) {
+        this.dao = dao;
     }
 
 }

@@ -31,6 +31,8 @@ import static locadora.builders.UsuarioBuilder.umUsuario;
 import locadora.entidades.Filme;
 import locadora.entidades.Locacao;
 import locadora.entidades.Usuario;
+import locadora.entidades.dao.LocacaoDAO;
+import locadora.entidades.dao.LocacaoDAOFake;
 import locadora.excecoes.FilmeSemEstoqueException;
 import locadora.excecoes.LocadoraException;
 import locadora.matchers.DiaSemanaMatcher;
@@ -62,6 +64,9 @@ public class LocacaoServiceTest {
         System.out.println("Test: " + contador);
         
         locacaoService = new LocacaoService();
+        
+        LocacaoDAO dao = new LocacaoDAOFake();
+        locacaoService.setLocacaoDAO(dao);
     }
     
     @After
