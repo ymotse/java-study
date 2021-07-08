@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
+import org.mockito.Mockito;
 
 import locadora.entidades.Filme;
 import locadora.entidades.Locacao;
@@ -40,7 +41,7 @@ public class CalculoValorLocacaoTest {
     public void setup() {
         locacaoService = new LocacaoService();
         
-        LocacaoDAO dao = new LocacaoDAOFake();
+        LocacaoDAO dao = Mockito.mock(LocacaoDAO.class);
         locacaoService.setLocacaoDAO(dao);
     }
     
