@@ -225,7 +225,7 @@ public class LocacaoServiceTest {
         Usuario usuario = umUsuario().agora();
         List<Filme> filmes = Arrays.asList(umFilme().agora());
         
-        when(spcService.possuiNegativacao(usuario)).thenReturn(true);
+        when(spcService.possuiNegativacao(Mockito.any(Usuario.class))).thenReturn(true);
         
         try {
             locacaoService.alugarFilme(usuario, filmes);
@@ -240,17 +240,22 @@ public class LocacaoServiceTest {
     @Test
     public void deveEnviarEmailParaLocacoesAtrasados() {
         Usuario usuario = umUsuario().agora();
+        Usuario usuario2 = umUsuario().comNome("Usuario em dia").agora();
+        Usuario usuario3 = umUsuario().comNome("Outro atrasado").agora();
         
         List<Locacao> locacaoes = Arrays.asList(
-                umLocacao()
-                    .comUsuario(usuario)
-                    .comDataRetorno(DataUtils.obterDataComDiferencaDias(-2))
-                    .agora());
+                umLocacao().atrasado().comUsuario(usuario).agora(),
+                umLocacao().comUsuario(usuario2).agora(),
+                umLocacao().atrasado().comUsuario(usuario3).agora());
         
         when(dao.obterLocacoesPendentes()).thenReturn(locacaoes);
         
         locacaoService.notificarAtrasos();
         
+        Mockito.verify(emailService, Mockito.times(2)).notificarAtraso(Mockito.any(Usuario.class));
         Mockito.verify(emailService).notificarAtraso(usuario);
+        Mockito.verify(emailService, Mockito.atLeastOnce()).notificarAtraso(usuario3);
+        Mockito.verify(emailService, Mockito.never()).notificarAtraso(usuario2);
+        Mockito.verifyNoMoreInteractions(emailService);
     }
 }
