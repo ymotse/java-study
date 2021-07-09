@@ -17,21 +17,27 @@ import locadora.utils.DataUtils;
 public class LocacaoService {
     
     private LocacaoDAO dao;
+    private SPCService spcService;
+    
     
     public Locacao alugarFilme(Usuario usuario, List<Filme> filmes) throws LocadoraException, FilmeSemEstoqueException {
         
+        if(usuario == null) {
+            throw new LocadoraException("Usuário vazio");
+        }
+
         if(filmes == null || filmes.isEmpty()) {
             throw new LocadoraException("Filmes vazios");
         }
-
+        
         for (Filme filme : filmes) {
             if(filme.getEstoque() == 0) {
                 throw new FilmeSemEstoqueException();
             }
         }
         
-        if(usuario == null) {
-            throw new LocadoraException("Usuário vazio");
+        if(spcService.possuiNegativacao(usuario)) {
+            throw new LocadoraException("Usuário Negativado!");
         }
         
         Locacao locacao = new Locacao();
@@ -79,6 +85,10 @@ public class LocacaoService {
     
     public void setLocacaoDAO(LocacaoDAO dao) {
         this.dao = dao;
+    }
+    
+    public void setSPCService(SPCService spc) {
+        spcService = spc;
     }
 
 }
