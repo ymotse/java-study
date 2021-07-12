@@ -13,7 +13,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.junit.Assume.assumeFalse;
 import static org.junit.Assume.assumeTrue;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -29,7 +28,10 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import locadora.entidades.Filme;
 import locadora.entidades.Locacao;
@@ -41,10 +43,16 @@ import locadora.utils.DataUtils;
 
 public class LocacaoServiceTest {
     
+    @InjectMocks
     private LocacaoService locacaoService;
     
+    @Mock
     private SPCService spcService;
+    
+    @Mock
     private LocacaoDAO dao;
+    
+    @Mock
     private EmailService emailService;
     
     private static int contador = 0;
@@ -67,16 +75,7 @@ public class LocacaoServiceTest {
         contador++;
         System.out.println("Test: " + contador);
         
-        locacaoService = new LocacaoService();
-        
-        dao = mock(LocacaoDAO.class);
-        locacaoService.setLocacaoDAO(dao);
-        
-        spcService = mock(SPCService.class);
-        locacaoService.setSPCService(spcService);
-        
-        emailService = mock(EmailService.class);
-        locacaoService.setEmailService(emailService);
+        MockitoAnnotations.initMocks(this);
     }
     
     @After

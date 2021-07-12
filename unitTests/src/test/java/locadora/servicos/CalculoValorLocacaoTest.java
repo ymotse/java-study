@@ -13,20 +13,28 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
-import org.mockito.Mockito;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import locadora.entidades.Filme;
 import locadora.entidades.Locacao;
 import locadora.entidades.Usuario;
 import locadora.entidades.dao.LocacaoDAO;
-import locadora.entidades.dao.LocacaoDAOFake;
 import locadora.excecoes.FilmeSemEstoqueException;
 import locadora.excecoes.LocadoraException;
 
 @RunWith(Parameterized.class)
 public class CalculoValorLocacaoTest {
     
+    @InjectMocks
     private LocacaoService locacaoService;
+    
+    @Mock
+    private LocacaoDAO locacaoDAO;
+    
+    @Mock
+    private SPCService spcService;
     
     @Parameter
     public List<Filme> filmes;
@@ -39,13 +47,7 @@ public class CalculoValorLocacaoTest {
     
     @Before
     public void setup() {
-        locacaoService = new LocacaoService();
-        
-        LocacaoDAO dao = Mockito.mock(LocacaoDAO.class);
-        locacaoService.setLocacaoDAO(dao);
-        
-        SPCService spcService = Mockito.mock(SPCService.class);
-        locacaoService.setSPCService(spcService);
+        MockitoAnnotations.initMocks(this);
     }
     
     private static Filme filme1 = new Filme("Filme 1", 2, 4.0);
