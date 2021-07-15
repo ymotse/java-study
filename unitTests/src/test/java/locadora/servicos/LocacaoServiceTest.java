@@ -27,7 +27,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -44,9 +43,7 @@ import locadora.excecoes.FilmeSemEstoqueException;
 import locadora.excecoes.LocadoraException;
 import locadora.matchers.MatchersProprios;
 import locadora.utils.DataUtils;
-import runners.ParallelRunner;
 
-@RunWith(ParallelRunner.class)
 public class LocacaoServiceTest {
     
     @InjectMocks @Spy

@@ -5,10 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import locadora.excecoes.NaoPodeDividirPorZeroException;
-import runners.ParallelRunner;
 
 /**
  * TDD
@@ -20,7 +18,6 @@ import runners.ParallelRunner;
  * [3] Refactor
  *
  */
-@RunWith(ParallelRunner.class)
 public class CalculadoraTest {
     
     private Calculadora calculadora;
