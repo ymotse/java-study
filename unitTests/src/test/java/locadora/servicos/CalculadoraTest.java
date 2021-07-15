@@ -2,10 +2,13 @@ package locadora.servicos;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import locadora.excecoes.NaoPodeDividirPorZeroException;
+import runners.ParallelRunner;
 
 /**
  * TDD
@@ -17,6 +20,7 @@ import locadora.excecoes.NaoPodeDividirPorZeroException;
  * [3] Refactor
  *
  */
+@RunWith(ParallelRunner.class)
 public class CalculadoraTest {
     
     private Calculadora calculadora;
@@ -24,8 +28,13 @@ public class CalculadoraTest {
     @Before
     public void setup() {
         calculadora = new Calculadora();
+        System.out.println("iniciando...");
     }
     
+    @After
+    public void tearDown() {
+        System.out.println("finalizando...");
+    }
     
     @Test
     public void deveSomarDoisValores() {
