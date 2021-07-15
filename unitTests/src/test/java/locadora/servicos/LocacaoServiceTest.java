@@ -11,7 +11,6 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import static org.junit.Assume.assumeFalse;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -49,7 +48,7 @@ import locadora.matchers.MatchersProprios;
 import locadora.utils.DataUtils;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ LocacaoService.class, DataUtils.class })
+@PrepareForTest({ LocacaoService.class })
 public class LocacaoServiceTest {
     
     @InjectMocks
@@ -99,7 +98,13 @@ public class LocacaoServiceTest {
     @Test
     public void alugarFilme_retornaLocacao_quandoBemSucedido() throws Exception {
         
-        PowerMockito.whenNew(Date.class).withNoArguments().thenReturn(DataUtils.obterData(16, 07, 2021));
+//        PowerMockito.whenNew(Date.class).withNoArguments().thenReturn(DataUtils.obterData(16, 07, 2021));
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, 16);
+        calendar.set(Calendar.MONTH, Calendar.JULY);
+        calendar.set(Calendar.YEAR, 2021);
+        PowerMockito.mockStatic(Calendar.class);
+        PowerMockito.when(Calendar.getInstance()).thenReturn(calendar);
         
         //# cenario:
         Usuario usuario = umUsuario().agora();
@@ -113,9 +118,10 @@ public class LocacaoServiceTest {
         assertThat(locacao.getValor(), is(equalTo(5.0)));
         assertThat(locacao.getValor(), is(not(6.0)));
         
-        assertTrue(DataUtils.isMesmaData(locacao.getDataLocacao(), new Date()));
-        assertThat(DataUtils.isMesmaData(locacao.getDataLocacao(), new Date()), is(true));
-        assertTrue(DataUtils.isMesmaData(locacao.getDataRetorno(), DataUtils.obterDataComDiferencaDias(1)));
+        
+//        assertTrue(DataUtils.isMesmaData(locacao.getDataLocacao(), new Date()));
+//        assertThat(DataUtils.isMesmaData(locacao.getDataLocacao(), new Date()), is(true));
+//        assertTrue(DataUtils.isMesmaData(locacao.getDataRetorno(), DataUtils.obterDataComDiferencaDias(1)));
 
         errorCollector.checkThat(DataUtils.isMesmaData(locacao.getDataLocacao(), DataUtils.obterData(16, 07, 2021)), is(true));
         errorCollector.checkThat(DataUtils.isMesmaData(locacao.getDataRetorno(), DataUtils.obterData(17, 07, 2021)), is(true));
@@ -219,7 +225,13 @@ public class LocacaoServiceTest {
         Usuario usuario = new Usuario("Usuário 1");
         List<Filme> filmes = Arrays.asList(umFilme().agora());
         
-        PowerMockito.whenNew(Date.class).withNoArguments().thenReturn(DataUtils.obterData(17, 07, 2021));
+//        PowerMockito.whenNew(Date.class).withNoArguments().thenReturn(DataUtils.obterData(17, 07, 2021));
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, 17);
+        calendar.set(Calendar.MONTH, Calendar.JULY);
+        calendar.set(Calendar.YEAR, 2021);
+        PowerMockito.mockStatic(Calendar.class);
+        PowerMockito.when(Calendar.getInstance()).thenReturn(calendar);
         
         //#acao
         Locacao retorno = locacaoService.alugarFilme(usuario, filmes);
@@ -231,7 +243,9 @@ public class LocacaoServiceTest {
         assertThat(retorno.getDataRetorno(), caiEm(Calendar.MONDAY));
         assertThat(retorno.getDataRetorno(), caiEmUmaSegunda());
         
-        PowerMockito.verifyNew(Date.class, Mockito.times(2)).withNoArguments();
+//        PowerMockito.verifyNew(Date.class, Mockito.times(2)).withNoArguments();
+        PowerMockito.verifyStatic(Mockito.times(2));
+        Calendar.getInstance();
     }
     
     @Test
