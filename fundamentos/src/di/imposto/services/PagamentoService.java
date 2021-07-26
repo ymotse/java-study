@@ -2,7 +2,11 @@ package di.imposto.services;
 
 public class PagamentoService {
     
-    private DeducaoService deducaoService = new MGDeducaoService();
+    private DeducaoService deducaoService;
+    
+    public PagamentoService(DeducaoService deducaoService) {
+        this.deducaoService = deducaoService;
+    }
     
     public double taxa(double valor) {
         valor = valor - deducaoService.deducao(valor);
