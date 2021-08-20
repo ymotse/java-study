@@ -10,6 +10,8 @@ public class Anime {
     * Bloco de Inicializacao.
     * Executado antes do construtor.
     *
+    * 0: Bloco de Inicializacao Estatico.
+    * 0.1: Bloco de Inicializacao.
     * 1 - Alocado espaco em memoria para o objeto criado
     * 2 - Cada atributo da classe eh criado e inicializado com valores default
     * 3 - Bloco de inicializacao
@@ -17,6 +19,14 @@ public class Anime {
     */
     {
         System.out.println("Dentro do Bloco de Inicializacao.");
+    }
+
+    /**
+     * Bloco de Inicializacao Estatico.
+     * Executado apenas uma vez, quando a classe eh carregada pela JVM.
+     */
+    static {
+        System.out.println("Dentro do Bloco de Inicializacao Estatico.");
     }
 
     public Anime(String nome, String tipo, int episodios) {
