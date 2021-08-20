@@ -6,6 +6,19 @@ public class Anime {
     private int episodios;
     private String genero;
 
+    /*
+    * Bloco de Inicializacao.
+    * Executado antes do construtor.
+    *
+    * 1 - Alocado espaco em memoria para o objeto criado
+    * 2 - Cada atributo da classe eh criado e inicializado com valores default
+    * 3 - Bloco de inicializacao
+    * 4 - Construtor executado
+    */
+    {
+        System.out.println("Dentro do Bloco de Inicializacao.");
+    }
+
     public Anime(String nome, String tipo, int episodios) {
         this.nome = nome;
         this.tipo = tipo;
