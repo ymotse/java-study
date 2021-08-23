@@ -2,6 +2,7 @@ package com.ymotse.maratona.modificadorFinal.execute;
 
 import com.ymotse.maratona.modificadorFinal.dominio.Carro;
 import com.ymotse.maratona.modificadorFinal.dominio.Comprador;
+import com.ymotse.maratona.modificadorFinal.dominio.Ferrari;
 
 public class CarroTest01 {
 
@@ -13,6 +14,10 @@ public class CarroTest01 {
 
         carro.COMPRADOR.setNome("Kuririn");
         System.out.println(carro.COMPRADOR);
+
+        Ferrari ferrari = new Ferrari();
+        ferrari.setNome("Enzo");
+        ferrari.imprimir();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.ymotse.maratona.modificadorFinal.dominio;
 
+//public final class Carro {
 public class Carro {
     private String nome;
 //    private static final double VELOCIDADE_LIMITE = 250;
@@ -8,6 +9,10 @@ public class Carro {
 
     static {
         VELOCIDADE_LIMITE = 250;
+    }
+
+    public final void imprimir() {
+        System.out.println(this.nome);
     }
 
     public String getNome() {
