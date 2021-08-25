@@ -1,5 +1,6 @@
 package com.ymotse.maratona.interfaces.execute;
 
+import com.ymotse.maratona.interfaces.dominio.DataLoader;
 import com.ymotse.maratona.interfaces.dominio.DatabaseLoader;
 import com.ymotse.maratona.interfaces.dominio.FileLoader;
 
@@ -16,6 +17,9 @@ public class DataLoaderTest01 {
 
         databaseLoader.checkPermission();
         fileLoader.checkPermission();
+
+        DataLoader.retrieveMaxDataSize();
+        DatabaseLoader.retrieveMaxDataSize();
     }
 
 }
