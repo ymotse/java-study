@@ -59,7 +59,7 @@ public class ContactDAO {
         @SuppressWarnings("unchecked")
         List<Object[]> results = (List<Object[]>) q.getResultList();
 
-        List<Contact> contacts = new ArrayList<>();
+        List<Contact> contacts = new ArrayList<Contact>();
         for (Object[] contactObject : results) {
             Long id = Long.parseLong(contactObject[0].toString());
             String name = contactObject[1].toString();
@@ -70,6 +70,11 @@ public class ContactDAO {
         }
 
         return contacts;
+    }
+    
+    @SuppressWarnings("unchecked")
+	public List<Contact> listAll() {
+    	return em.createNamedQuery("listAllContact").getResultList();
     }
 
 }

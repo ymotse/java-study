@@ -45,4 +45,10 @@ public class ContactBean implements ContactRemote {
         return contactDAO.findByListId(listId);
     }
 
+	@Override
+	public List<Contact> listAll() {
+		ContactDAO contactDAO = new ContactDAO(em);
+		return contactDAO.listAll();
+	}
+
 }

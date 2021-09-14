@@ -18,4 +18,6 @@ public interface ContactRemote {
     public void remove(Long id);
     
     public List<Contact> findByListId(List<Long> listId) throws Exception;
+    
+    public List<Contact> listAll();
 }
