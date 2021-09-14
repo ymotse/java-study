@@ -7,6 +7,7 @@
     <persistence-unit name="contactEjb"
         transaction-type="JTA">
         <jta-data-source>java:/OracleDS</jta-data-source>
+        <class>com.example.model.Contact</class>
         <properties>
             <property name="hibernate.show_sql" value="false"></property>
             <property name="hibernate.format_sql" value="false"></property>

@@ -35,7 +35,7 @@ public class ContactCreator {
     }
     
     public static List<Object[]> createObjectContactInList() throws Exception {
-        List<Object[]> objectContacts = new ArrayList<>();
+        List<Object[]> objectContacts = new ArrayList<Object[]>();
         
         objectContacts.add(new Object[] { 1L, "John", "29/02/2020", "john@mail.com" });
 
@@ -54,7 +54,7 @@ public class ContactCreator {
     }
     
     public static List<Object[]> createTwoObjectContactsInList() throws Exception {
-        List<Object[]> objectContacts = new ArrayList<>();
+        List<Object[]> objectContacts = new ArrayList<Object[]>();
         
         objectContacts.add(new Object[] { 1L, "John", "29/02/2020", "john@mail.com" });
         objectContacts.add(new Object[] { 2L, "John 2", "28/02/2021", null });

@@ -1,5 +1,15 @@
 package com.example.dao;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
+
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,10 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import static org.mockito.ArgumentMatchers.*;
 import org.mockito.Mock;
-import static org.mockito.Mockito.*;
-import static org.mockito.MockitoAnnotations.*;
 
 import com.example.ContactCreator;
 import com.example.model.Contact;
@@ -128,7 +135,7 @@ public class ContactDAOTest extends TestCase {
         when(em.createNativeQuery(queryString)).thenReturn(queryMock);
         when(queryMock.getResultList()).thenReturn(ContactCreator.createTwoObjectContactsInList());
 
-        List<Contact> contacts = contactDAO.findByListId(anyList());
+        List<Contact> contacts = contactDAO.findByListId(Arrays.asList(anyLong()));
 
         assertNotNull(contacts);
         assertEquals(ContactCreator.createTwoContactsInListToBeValidate(), contacts);
