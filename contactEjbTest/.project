@@ -3,7 +3,6 @@
 	<name>contactEjbTest</name>
 	<comment></comment>
 	<projects>
-		<project>contactEjb</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
