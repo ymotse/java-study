@@ -19,9 +19,22 @@ public class ListTest01 {
         nomes.add("Suane");
         System.out.println("-----------------");
 
+        List<String> nomes2 = new ArrayList<>();
+        nomes2.addAll(nomes);
+
+        nomes.remove(1);
+        nomes.remove("William");
         for (int i=0; i<nomes.size(); i++) {
             System.out.println(nomes.get(i));
         }
+        System.out.println("-----------------");
+
+        for (String nome : nomes2) {
+            System.out.println(nome);
+        }
+
+        List<Integer> numeros = new ArrayList<>();
+        numeros.add(1);
     }
 
 }
