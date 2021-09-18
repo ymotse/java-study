@@ -1,5 +1,6 @@
 package com.ymotse.maratona.colecoes.execute;
 
+import com.ymotse.maratona.colecoes.dominio.Manga;
 import com.ymotse.maratona.colecoes.dominio.Smartphone;
 
 import java.util.ArrayList;
