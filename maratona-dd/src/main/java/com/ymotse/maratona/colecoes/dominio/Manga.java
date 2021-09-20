@@ -2,7 +2,7 @@ package com.ymotse.maratona.colecoes.dominio;
 
 import java.util.Objects;
 
-public class Manga {
+public class Manga implements Comparable<Manga> {
 
     private Long id;
     private String nome;
@@ -36,5 +36,50 @@ public class Manga {
     @Override
     public int hashCode() {
         return Objects.hash(id, nome, preco);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    @Override
+    public int compareTo(Manga outroManga) {
+        //negativo se o this < outroManga
+        //se this == outroManga, return 0
+        //positivo se this > outroManga
+
+        /*
+        if(this.id < outroManga.getId()) {
+            return -1;
+        } else if(this.id.equals(outroManga.getId())) {
+            return 0;
+        } else {
+            return 1;
+        }
+        */
+
+//        return this.nome.compareTo(outroManga.getNome());
+//        return Double.valueOf(preco).compareTo(outroManga.getPreco());
+        return this.id.compareTo(outroManga.getId());
     }
 }
