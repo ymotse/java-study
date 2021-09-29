@@ -31,6 +31,11 @@ public class ComportamentoPorParametroTest01 {
 
         System.out.println(greenCars);
         System.out.println(yearBeforeCars);
+
+        System.out.println("---------------");
+
+        System.out.println(filter(cars, (Car car) -> car.getColor().equals("black")));;
+        System.out.println(filter(cars, (Car car) -> car.getColor().equals("red")));;
     }
 
     private static List<Car> filter(List<Car> cars, CarPredicate carPredicate) {
