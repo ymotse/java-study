@@ -1,4 +1,4 @@
-package com.ymotse.maratona.comportamento.execute;
+package com.ymotse.maratona.lambda.execute;
 
 import java.util.List;
 import java.util.function.Consumer;
