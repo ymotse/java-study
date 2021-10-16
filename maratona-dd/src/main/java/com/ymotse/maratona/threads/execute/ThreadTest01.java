@@ -55,6 +55,15 @@ public class ThreadTest01 {
         t2.start();
         t3.start();
         t4.start();
+
+        /**
+         *           Waiting Blocked
+         *              /      ^
+         *            /         \
+         *           v           \
+         * New -> Runnable -> Running -> Dead
+         */
+        System.out.println("####################Thread name: " + Thread.currentThread().getName());
     }
 
 }
