@@ -4,6 +4,7 @@ import com.ymotse.maratona.threads.dominio.Account;
 
 public class ThreadAccountTest01 implements Runnable {
 
+//    private final Account account2 = new Account();
     private Account account = new Account();
 
     public static void main(String[] args) {
@@ -24,14 +25,17 @@ public class ThreadAccountTest01 implements Runnable {
         }
     }
 
-    private void withdrawal(int amount) {
-        if(account.getBalance() >= amount) {
-            System.out.println(getName() + " esta indo sacar dinheiro");
-            account.withdrawal(amount);
-            System.out.println(getName() + " completou o saque, valor atual da conta " + account.getBalance());
-        } else {
-            System.out.println("Sem dinheiro para " + getName() + " efetuar o saque " + account.getBalance());
-        }
+//    private void withdrawal(int amount) {
+    private synchronized void withdrawal(int amount) {
+//        synchronized (account) {
+            if (account.getBalance() >= amount) {
+                System.out.println(getName() + " esta indo sacar dinheiro");
+                account.withdrawal(amount);
+                System.out.println(getName() + " completou o saque, valor atual da conta " + account.getBalance());
+            } else {
+                System.out.println("Sem dinheiro para " + getName() + " efetuar o saque " + account.getBalance());
+            }
+//        }
     }
 
     private String getName() {
