@@ -4,7 +4,7 @@ import java.util.concurrent.*;
 
 public class FutureTest01 {
 
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+    public static void main(String[] args) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Future<Double> dollarRequest = executorService.submit(() -> {
             TimeUnit.SECONDS.sleep(5);
@@ -14,11 +14,13 @@ public class FutureTest01 {
         Double dollarResponse = null;
         try {
             dollarResponse = dollarRequest.get(3, TimeUnit.SECONDS);
-        } catch (TimeoutException e) {
+        } catch (TimeoutException | ExecutionException | InterruptedException e) {
             System.out.println("Tempo limite de espera ultrapassado: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            executorService.shutdown();
         }
         System.out.println("Dollar: " + dollarResponse);
-        executorService.shutdown();
     }
 
     private static long doSomething() {
