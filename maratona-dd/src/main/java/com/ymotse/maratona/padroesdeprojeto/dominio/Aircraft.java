@@ -20,4 +20,7 @@ public final class Aircraft {
         return availableSeats.remove(seat);
     }
 
+    public String getName() {
+        return name;
+    }
 }
