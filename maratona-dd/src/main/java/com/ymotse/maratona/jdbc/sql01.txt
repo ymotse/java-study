@@ -1,0 +1,22 @@
+CREATE DATABASE `anime_store` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE anime_store;
+
+-- anime_store.producer definition
+CREATE TABLE `producer` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- anime_store.anime definition
+CREATE TABLE `anime` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(300) NOT NULL,
+  `episodes` int(11) NOT NULL,
+  `producer_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `anime_FK` (`producer_id`),
+  CONSTRAINT `anime_FK` FOREIGN KEY (`producer_id`) REFERENCES `producer` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
