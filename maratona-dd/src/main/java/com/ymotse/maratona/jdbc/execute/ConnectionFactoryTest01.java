@@ -1,9 +1,11 @@
 package com.ymotse.maratona.jdbc.execute;
 
-import com.ymotse.maratona.jdbc.conn.ConnectionFactory;
+import com.ymotse.maratona.jdbc.dominio.Producer;
+import com.ymotse.maratona.jdbc.repository.ProducerRepository;
 
 public class ConnectionFactoryTest01 {
     public static void main(String[] args) {
-        ConnectionFactory.getConnection();
+        Producer producer = Producer.ProducerBuilder.builder().name("NHK").build();
+        ProducerRepository.save(producer);
     }
 }
