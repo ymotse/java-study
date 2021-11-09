@@ -3,6 +3,8 @@ package com.ymotse.maratona.jdbc.service;
 import com.ymotse.maratona.jdbc.dominio.Producer;
 import com.ymotse.maratona.jdbc.repository.ProducerRepository;
 
+import java.util.List;
+
 public class ProducerService {
 
     public static void save(Producer producer) {
@@ -23,5 +25,9 @@ public class ProducerService {
         if(id == null || id <= 0) {
             throw new IllegalArgumentException("Invalid value for ID");
         }
+    }
+
+    public static List<Producer> findAll() {
+        return ProducerRepository.findAll();
     }
 }
