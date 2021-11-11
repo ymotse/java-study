@@ -91,4 +91,33 @@ public class ProducerRepository {
         }
     }
 
+    public static void showDriverMetadata() {
+        log.info("Showing Driver Metadata\n");
+        try (Connection conn = ConnectionFactory.getConnection()) {
+            DatabaseMetaData databaseMetaData = conn.getMetaData();
+            if(databaseMetaData.supportsResultSetType(ResultSet.TYPE_FORWARD_ONLY)) {
+                log.info("Supports TYPE_FORWARD_ONLY");
+                if(databaseMetaData.supportsResultSetConcurrency(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE)) {
+                    log.info("And Supports CONCUR_UPDATABLE");
+                }
+            }
+
+            if(databaseMetaData.supportsResultSetType(ResultSet.TYPE_SCROLL_INSENSITIVE)) {
+                log.info("Supports TYPE_SCROLL_INSENSITIVE");
+                if(databaseMetaData.supportsResultSetConcurrency(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
+                    log.info("And Supports CONCUR_UPDATABLE");
+                }
+            }
+
+            if(databaseMetaData.supportsResultSetType(ResultSet.TYPE_SCROLL_SENSITIVE)) {
+                log.info("Supports TYPE_SCROLL_SENSITIVE");
+                if(databaseMetaData.supportsResultSetConcurrency(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
+                    log.info("And Supports CONCUR_UPDATABLE");
+                }
+            }
+        } catch(SQLException e) {
+            log.error("Error while showing driver matadata.", e);
+        }
+    }
+
 }

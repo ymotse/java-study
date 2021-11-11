@@ -39,5 +39,9 @@ public class ProducerService {
         ProducerRepository.showProducerMetadata();
     }
 
+    public static void showDriverMetadata() {
+        ProducerRepository.showDriverMetadata();
+    }
+
 }
 
