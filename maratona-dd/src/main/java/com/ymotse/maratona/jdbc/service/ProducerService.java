@@ -51,5 +51,13 @@ public class ProducerService {
         return ProducerRepository.findByNameAndUpdateToUpperCase(name);
     }
 
+    public static List<Producer> findByNameAndInsertThenNotFound(String name) {
+        return ProducerRepository.findByNameAndInsertThenNotFound(name);
+    }
+
+    public static void findByNameAndDelete(String name) {
+        ProducerRepository.findByNameAndDelete(name);
+    }
+
 }
 

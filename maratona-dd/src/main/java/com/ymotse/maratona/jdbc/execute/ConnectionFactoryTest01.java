@@ -1,7 +1,6 @@
 package com.ymotse.maratona.jdbc.execute;
 
 import com.ymotse.maratona.jdbc.dominio.Producer;
-import com.ymotse.maratona.jdbc.repository.ProducerRepository;
 import com.ymotse.maratona.jdbc.service.ProducerService;
 import lombok.extern.log4j.Log4j2;
 
@@ -22,7 +21,10 @@ public class ConnectionFactoryTest01 {
 //        ProducerService.showProducerMetadata();
 //        ProducerService.showDriverMetadata();
 //        ProducerService.showTypeScrollWorking();
-        List<Producer> producers = ProducerService.findByNameAndUpdateToUpperCase("Deen");
+//        List<Producer> producers = ProducerService.findByNameAndUpdateToUpperCase("Deen");
+//        log.info("Producers found '{}'", producers);
+        List<Producer> producers = ProducerService.findByNameAndInsertThenNotFound("Bones");
         log.info("Producers found '{}'", producers);
+        ProducerService.findByNameAndDelete("Bon");
     }
 }
