@@ -34,7 +34,6 @@ public class ProducerService {
     public static List<Producer> findByName(String name) {
         return ProducerRepository.findByName(name);
     }
-
     public static void showProducerMetadata() {
         ProducerRepository.showProducerMetadata();
     }
@@ -57,6 +56,10 @@ public class ProducerService {
 
     public static void findByNameAndDelete(String name) {
         ProducerRepository.findByNameAndDelete(name);
+    }
+
+    public static List<Producer> findByNamePreparedStatement(String name) {
+        return ProducerRepository.findByNamePreparedStatement(name);
     }
 
 }
