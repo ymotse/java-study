@@ -20,3 +20,8 @@ CREATE TABLE `anime` (
   CONSTRAINT `anime_FK` FOREIGN KEY (`producer_id`) REFERENCES `producer` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
+
+CREATE DEFINER=`root`@`%` PROCEDURE `anime_store`.`sp_get_producer_by_name`(name varchar(100))
+BEGIN
+    SELECT * FROM producer p WHERE p.name LIKE name;
+END
