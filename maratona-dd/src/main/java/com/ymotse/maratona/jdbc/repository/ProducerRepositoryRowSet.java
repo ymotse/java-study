@@ -2,8 +2,11 @@ package com.ymotse.maratona.jdbc.repository;
 
 import com.ymotse.maratona.jdbc.conn.ConnectionFactory;
 import com.ymotse.maratona.jdbc.dominio.Producer;
+import com.ymotse.maratona.jdbc.listener.CustomRowSetListener;
 
 import javax.sql.rowset.JdbcRowSet;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +17,7 @@ public class ProducerRepositoryRowSet {
         String sql = "SELECT * FROM producer WHERE name LIKE ?";
         List<Producer> producers = new ArrayList<>();
         try (JdbcRowSet jdbcRowSet = ConnectionFactory.getJdbcRowSet()){
+            jdbcRowSet.addRowSetListener(new CustomRowSetListener());
             jdbcRowSet.setCommand(sql);
             jdbcRowSet.setString(1, String.format("%%%s%%", name));
             jdbcRowSet.execute();
@@ -26,4 +30,35 @@ public class ProducerRepositoryRowSet {
         }
         return producers;
     }
+
+//    public static void updateJdbcRowSet(Producer producer) {
+//        String sql = "UPDATE anime_store.producer SET name = ? WHERE id = ?";
+//        try (JdbcRowSet jdbcRowSet = ConnectionFactory.getJdbcRowSet()){
+//            jdbcRowSet.setCommand(sql);
+//            jdbcRowSet.setString(1, producer.getName());
+//            jdbcRowSet.setInt(2, producer.getId());
+//            jdbcRowSet.execute();
+//        } catch(SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public static void updateJdbcRowSet(Producer producer) {
+        String sql = "SELECT * FROM producer WHERE id = ?";
+        try (JdbcRowSet jdbcRowSet = ConnectionFactory.getJdbcRowSet()){
+            jdbcRowSet.addRowSetListener(new CustomRowSetListener());
+            jdbcRowSet.setCommand(sql);
+            jdbcRowSet.setInt(1, producer.getId());
+            jdbcRowSet.execute();
+            if(!jdbcRowSet.next()) {
+                return;
+            }
+
+            jdbcRowSet.updateString("name", producer.getName());
+            jdbcRowSet.updateRow();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
