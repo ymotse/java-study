@@ -1,5 +1,6 @@
 package com.ymotse.maratona.jdbc.conn;
 
+import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.JdbcRowSet;
 import javax.sql.rowset.RowSetProvider;
 import java.sql.Connection;
@@ -26,5 +27,9 @@ public class ConnectionFactory {
         jdbcRowSet.setUsername(username);
         jdbcRowSet.setPassword(password);
         return jdbcRowSet;
+    }
+
+    public static CachedRowSet getCachedRowSet() throws SQLException {
+        return RowSetProvider.newFactory().createCachedRowSet();
     }
 }

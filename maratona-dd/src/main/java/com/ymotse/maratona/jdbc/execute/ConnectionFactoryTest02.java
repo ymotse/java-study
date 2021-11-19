@@ -13,8 +13,11 @@ public class ConnectionFactoryTest02 {
 //        List<Producer> producers = ProducerServiceRowSet.findByNameJdbcRowSet("Fox");
 //        log.info("Producers '{}'", producers);
 
+//        Producer producerToUpdate = Producer.builder().id(1).name("MADHOUSE").build();
+//        ProducerServiceRowSet.updateJdbcRowSet(producerToUpdate);
+
         Producer producerToUpdate = Producer.builder().id(1).name("MADHOUSE").build();
-        ProducerServiceRowSet.updateJdbcRowSet(producerToUpdate);
+        ProducerServiceRowSet.updateCachedRowSet(producerToUpdate);
     }
 
 }
