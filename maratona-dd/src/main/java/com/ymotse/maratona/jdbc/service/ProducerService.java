@@ -70,5 +70,9 @@ public class ProducerService {
         return ProducerRepository.findByNameCallableStatement(name);
     }
 
+    public static void saveTransaction(List<Producer> producers) {
+        ProducerRepository.saveTransaction(producers);
+    }
+
 }
 
