@@ -57,4 +57,23 @@ public class ProducerRepository {
         return preparedStatement;
     }
 
+    public static void save(Producer producer) {
+        log.info("Saving Producer '{}'", producer);
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = createPreparedStatementSave(conn, producer)) {
+            ps.execute();
+        } catch(SQLException e) {
+            log.error("Error while trying to save producer '{}'", producer.getId(), e);
+        }
+    }
+
+    private static PreparedStatement createPreparedStatementSave(Connection connection, Producer producer) throws SQLException {
+        String sql = "INSERT INTO anime_store.producer (name) VALUES (?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, producer.getName());
+        return preparedStatement;
+    }
+
+
+
 }
