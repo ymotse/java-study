@@ -7,6 +7,7 @@ import lombok.extern.log4j.Log4j2;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Log4j2
 public class ProducerRepository {
@@ -74,6 +75,50 @@ public class ProducerRepository {
         return preparedStatement;
     }
 
+    public static Optional<Producer> findById(Integer id) {
+        log.info("Finding Producers by ID");
 
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = createPrepareStatementFindById(conn, id);
+             ResultSet rs = ps.executeQuery()) {
+
+            if(!rs.next()) {
+                return Optional.empty();
+            }
+
+            return Optional.of(Producer.builder()
+                    .id(rs.getInt("id"))
+                    .name(rs.getString("name"))
+                    .build());
+        } catch(SQLException e) {
+            log.error("Error while trying find producers by name Prepared Statement.", e);
+        }
+        return Optional.empty();
+    }
+
+    private static PreparedStatement createPrepareStatementFindById(Connection connection, Integer id) throws SQLException {
+        String sql = "SELECT * FROM anime_store.producer WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, id);
+        return preparedStatement;
+    }
+
+    public static void update(Producer producer) {
+        log.info("Updating producer '{}'", producer);
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = createPreparedStatementUpdate(conn, producer)) {
+            ps.execute();
+        } catch(SQLException e) {
+            log.error("Error while trying to update producer '{}'", producer.getId(), e);
+        }
+    }
+
+    private static PreparedStatement createPreparedStatementUpdate(Connection connection, Producer producer) throws SQLException {
+        String sql = "UPDATE anime_store.producer SET name = ? WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, producer.getName());
+        preparedStatement.setInt(2, producer.getId());
+        return preparedStatement;
+    }
 
 }
