@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" name="MyApp" packages="" monitorInterval="30">
+  <Appenders>
+    <RollingFile name="DailyRoll" fileName="/opt/teste_log.log" filePattern="/opt/$${date:yyyy-MM}/teste_log-%d{yyyy-MM-dd_HH-mm-ss}.log.gz">
+      <PatternLayout>
+        <Pattern>%p %d{yyyy-MM-dd HH:mm:ss.SSS} - %m%n</Pattern>
+      </PatternLayout>
+      <Policies>
+        <CronTriggeringPolicy schedule="* * * * * ?" />
+        <SizeBasedTriggeringPolicy size="2 MB" />
+      </Policies>
+    </RollingFile>
+  </Appenders>
+  <Loggers>
+    <Root level="trace">
+      <AppenderRef ref="DailyRoll"/>
+    </Root>
+  </Loggers>
+</Configuration>
