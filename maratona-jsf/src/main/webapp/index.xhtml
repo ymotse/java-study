@@ -11,22 +11,7 @@
 </h:head>
 
 <h:body>
-	<div id="header">
-		<ui:insert name="header">
-			<ui:include src="header.xhtml" />
-		</ui:insert>
-	</div>
-
-	<h:form>
-		<h:inputText id="nameInput" value="#{userData.name}" label="name">
-			<f:validateLength minimum="1" maximum="8" />
-		</h:inputText>
-		
-		<h:commandButton value="submit" action="result" />
-		
-		<br />
-		<h:message for="nameInput" style="color:red" />
-	</h:form>
+	<h2>Index.xhtml</h2>
 </h:body>
 
 </html>
