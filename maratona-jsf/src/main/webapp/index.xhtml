@@ -4,26 +4,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>JSF Hello World</title>
 </h:head>
 
 <h:body>
-    <h:outputLabel value="#{umNomeMaluco.nome}" /> <br />
-    <h:outputLabel value="#{umNomeMaluco.sobrenome}" /> <br />
-    <h:outputLabel value="#{umNomeMaluco.nota1 eq umNomeMaluco.nota2}" /> <br />
-    <h:outputLabel value="#{umNomeMaluco.nota1 == umNomeMaluco.nota2}" /> <br />
-    <h:outputLabel value="#{umNomeMaluco.nota1 eq umNomeMaluco.nota2 and umNomeMaluco.nome.equals('Yitshhaq')}" /> <br />
+
+    <h:outputLabel value="#{umNomeMaluco.estudante.nome}" /> <br />
+    <h:outputLabel value="#{umNomeMaluco.estudante.sobrenome}" /> <br />
+    <h:outputLabel value="#{umNomeMaluco.estudante.nota1 eq umNomeMaluco.estudante.nota2}" /> <br />
+    <h:outputLabel value="#{umNomeMaluco.estudante.nota1 == umNomeMaluco.estudante.nota2}" /> <br />
+    <h:outputLabel value="#{umNomeMaluco.estudante.nota1 eq umNomeMaluco.estudante.nota2 and umNomeMaluco.estudante.nome eq 'Yitshhaq'}" /> <br />
     
-    <h:outputText value="#{umNomeMaluco.nota1 lt umNomeMaluco.nota2}" /> <br />
-    <h:outputText value="#{umNomeMaluco.nota1 le umNomeMaluco.nota2}" /> <br />
-    <h:outputText value="#{umNomeMaluco.nota1 eq 0 ? 'ZERO' : 'NAO ZERO'}" /> <br />
-    <h:outputText value="#{umNomeMaluco.nota1 = 40}" /> <br />
-    <h:outputText value="#{umNomeMaluco.nota1}" /> <br />
-    <h:outputText value="#{umNomeMaluco.nome += ' sobrenome alguma coisa'}" /> <br />
-    <h:outputLabel value="#{umNomeMaluco.nome}" /> <br />
+    <h:outputText value="#{umNomeMaluco.estudante.nota1 lt umNomeMaluco.estudante.nota2}" /> <br />
+    <h:outputText value="#{umNomeMaluco.estudante.nota1 le umNomeMaluco.estudante.nota2}" /> <br />
+    <h:outputText value="#{umNomeMaluco.estudante.nota1 eq 0 ? 'ZERO' : 'NAO ZERO'}" /> <br />
+    <h:outputText value="#{umNomeMaluco.estudante.nota1 = 40}" /> <br />
+    <h:outputText value="#{umNomeMaluco.estudante.nota1}" /> <br />
+    <h:outputText value="#{umNomeMaluco.estudante.nome += ' sobrenome alguma coisa'}" /> <br />
+    <h:outputLabel value="#{umNomeMaluco.estudante.nome}" /> <br />
     
     <!-- 
         Palavras Reservadas: 
@@ -44,6 +46,17 @@
             div (divisao)
             mod
     -->
+    
+    <hr />
+    <h:outputLabel value="ENUM:" /> <br />
+    
+    <p:importEnum type="model.enums.Turno" 
+        var="Turno" 
+        allSuffix="ALL_ENUM_VALUES" />
+    
+    <h:outputLabel value="#{umNomeMaluco.estudante.turno}" /> <br />
+    <h:outputLabel value="#{umNomeMaluco.estudante.turno eq Turno.MATUTINO}" /> <br />
+    <h:outputLabel value="#{umNomeMaluco.estudante.turno eq Turno.VESPERTINO}" /> <br />
 </h:body>
 
 </html>
