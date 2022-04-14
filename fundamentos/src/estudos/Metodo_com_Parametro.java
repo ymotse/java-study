@@ -8,7 +8,7 @@ public class Metodo_com_Parametro {
 		System.out.println("Seu Saldo: "+saldo);
 	}
 	
-	void saca (double valor){ 		// ISSO Eh UM M�TODO COM PARAMETRO
+	void saca (double valor){ 		// ISSO Eh UM M�TODo COM PARAMETRO
 		saldo -= valor;
 		//  saldo = saldo - valor;
 	}
