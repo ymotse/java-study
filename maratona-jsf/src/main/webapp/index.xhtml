@@ -11,8 +11,39 @@
 </h:head>
 
 <h:body>
-    <h:outputLabel value="#{estudanteRegistrarBean.nome}" /> <br />
-    <h:outputLabel value="#{estudanteRegistrarBean.sobrenome}" />
+    <h:outputLabel value="#{umNomeMaluco.nome}" /> <br />
+    <h:outputLabel value="#{umNomeMaluco.sobrenome}" /> <br />
+    <h:outputLabel value="#{umNomeMaluco.nota1 eq umNomeMaluco.nota2}" /> <br />
+    <h:outputLabel value="#{umNomeMaluco.nota1 == umNomeMaluco.nota2}" /> <br />
+    <h:outputLabel value="#{umNomeMaluco.nota1 eq umNomeMaluco.nota2 and umNomeMaluco.nome.equals('Yitshhaq')}" /> <br />
+    
+    <h:outputText value="#{umNomeMaluco.nota1 lt umNomeMaluco.nota2}" /> <br />
+    <h:outputText value="#{umNomeMaluco.nota1 le umNomeMaluco.nota2}" /> <br />
+    <h:outputText value="#{umNomeMaluco.nota1 eq 0 ? 'ZERO' : 'NAO ZERO'}" /> <br />
+    <h:outputText value="#{umNomeMaluco.nota1 = 40}" /> <br />
+    <h:outputText value="#{umNomeMaluco.nota1}" /> <br />
+    <h:outputText value="#{umNomeMaluco.nome += ' sobrenome alguma coisa'}" /> <br />
+    <h:outputLabel value="#{umNomeMaluco.nome}" /> <br />
+    
+    <!-- 
+        Palavras Reservadas: 
+            and 
+            or 
+            not  
+            eq 
+            ne (not equal) 
+            lt (less than) 
+            gt (greather than) 
+            le (less or equals) 
+            ge (greather or equals) 
+            true 
+            false 
+            null
+            instanceof
+            empty
+            div (divisao)
+            mod
+    -->
 </h:body>
 
 </html>

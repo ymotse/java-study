@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 import javax.inject.Named;
 
-@Named
+@Named("umNomeMaluco")
 public class EstudanteRegistrarBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String nome = "Yitshhaq";
 	private String sobrenome = "Fukushima";
-	private double nota1;
+	private double nota1 = 10;
 	private double nota2;
 	private double nota3 = 10;
 	
