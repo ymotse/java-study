@@ -28,6 +28,27 @@ public class EstudanteRegistrarBean implements Serializable {
 	    nomesMap.put("Naruto", "O mais lenga lenga");
 	}
 	
+	public void executar() {
+	    System.out.println("Fazendo uma busca no BD...");
+	    System.out.println("Processando os dados...");
+	    System.out.println("Exibindo os dados...\n");
+	}
+	
+	public void executar(String param) {
+	    System.out.println("Fazendo uma busca no BD..." + param);
+	    System.out.println("Processando os dados..." + param);
+	    System.out.println("Exibindo os dados..." + param + "\n");
+	}
+	
+	public String executarComRetorno(String param) {
+	    return "Quem é o lindão? " + param;
+	}
+	
+	public String irParaIndex2() {
+//	    return "index2?faces-redirect=true";
+	    return "index2";
+	}
+	
     public Estudante getEstudante() {
         return estudante;
     }
