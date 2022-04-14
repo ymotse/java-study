@@ -57,6 +57,34 @@
     <h:outputLabel value="#{umNomeMaluco.estudante.turno}" /> <br />
     <h:outputLabel value="#{umNomeMaluco.estudante.turno eq Turno.MATUTINO}" /> <br />
     <h:outputLabel value="#{umNomeMaluco.estudante.turno eq Turno.VESPERTINO}" /> <br />
+    
+    <!-- Arrays -->
+    <hr />
+    <h:outputLabel value="#{umNomeMaluco.nomesArray[0]} #{umNomeMaluco.nomesArray[1]} #{umNomeMaluco.nomesArray[2]}" /> <br />
+    <ui:repeat var="nome" value="#{umNomeMaluco.nomesArray}">
+        <h:outputLabel value="#{nome}" /> <br />
+    </ui:repeat>
+    
+    <!-- List -->
+    <hr />
+    <h:outputLabel value="#{umNomeMaluco.nomesList.get(0)} #{umNomeMaluco.nomesList.get(1)} #{umNomeMaluco.nomesList.get(2)}" /> <br />
+    <ui:repeat var="nome" value="#{umNomeMaluco.nomesList}">
+        <h:outputLabel value="#{nome}" /> <br />
+    </ui:repeat>
+    
+    <!-- Set -->
+    <hr />
+    <ui:repeat var="nome" value="#{umNomeMaluco.nomesSet.toArray()}">
+        <h:outputLabel value="#{nome}" /> <br />
+    </ui:repeat>
+    
+    <!-- Map -->
+    <hr />
+    <h:outputLabel value="#{umNomeMaluco.nomesMap}" /> <br />
+    <h:outputLabel value="#{umNomeMaluco.nomesMap.get('Goku')}" /> <br />
+    <ui:repeat var="entry" value="#{umNomeMaluco.nomesMap.entrySet().toArray()}">
+        <h:outputLabel value="#{entry.key}: #{entry.value}" /> <br/>
+    </ui:repeat>
 </h:body>
 
 </html>
