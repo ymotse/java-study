@@ -5,7 +5,8 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 <h:head>
 	<title>JSF Hello World</title>
@@ -159,6 +160,49 @@
         </h:panelGroup>
     </h:form>
     
+    <hr />
+    
+    <!-- Lambdas e Streams : EL 3.0 -->
+    #{(soma -> soma + num)(10)} <br />
+    #{((v1, v2, v3) -> v1 * v2 * v3)(1,5,10)} <br />
+    #{(x -> x * x * x)(2)} <br />
+    #{cubo1 = (x -> x * x * x)} <br />
+    #{cubo1(10)} <br /> <!-- Exibirá o pacote, não recomendado -->
+    #{cubo2 = (x -> x * x * x); cubo2(11)} <br /> <!-- Declaracão e uso imediato, recomendado -->
+    
+    <h:form>
+        <h:commandButton value="Calcular Cubo" 
+            actionListener="#{umNomeMaluco.calcularCubo((x->x*x*x),10)}" />
+    </h:form>
+    
+    <!-- list -->
+    <ui:repeat var="fodeza" value="#{['DevDojo','e','foda']}">
+        #{fodeza} <br />
+    </ui:repeat>
+
+    <!-- set -->
+    <ui:repeat var="fodeza" value="#{{'DevDojo','e','foda','foda!'}}">
+        #{fodeza} <br />
+    </ui:repeat>
+    
+    <!-- map -->
+    <ui:repeat var="fodezaMap" value="#{{'Melhor Lugar':'DevDojo','Melhor curso':'Maratonas'}}">
+        <ui:repeat var="entry" value="#{fodezaMap}">
+            #{entry.key} - #{entry.value} <br />
+        </ui:repeat>
+    </ui:repeat>
+    
+    <ui:repeat var="result" value="#{[1,2,3,4,5,6,7,8,9,10].stream().filter(v-> v>5).toList()}">
+        #{result}<br />
+    </ui:repeat>
+    
+    <c:set var="numerosList" value="#{[1,2,3,4,5,6,7,8,9,10]}" />
+    <ui:repeat var="result" value="#{numerosList.stream().filter(v-> v>8).toList()}">
+        #{result}<br />
+    </ui:repeat>
+    #{numerosList.stream().average().get()} <br />
+    #{numerosList.stream().sum()} <br />
+    #{numerosList.stream().filter(v-> v>8).sum()} <br />
 </h:body>
 
 </html>

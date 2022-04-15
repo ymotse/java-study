@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.el.LambdaExpression;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
@@ -69,6 +71,17 @@ public class EstudanteRegistrarBean implements Serializable {
 	public void esconderLink() {
 	    this.mostrarLink = false;
 	}
+	
+	public void calcularCubo(LambdaExpression le, long value) {
+	    long result = (long) le.invoke(FacesContext.getCurrentInstance().getELContext(), value);
+	    
+	    System.out.println(result);
+	}
+	
+	
+	
+	
+	
 	
 	
     public Estudante getEstudante() {
