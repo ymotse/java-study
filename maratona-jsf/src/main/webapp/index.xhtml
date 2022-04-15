@@ -120,6 +120,45 @@
     	}
     </script>
     
+    <hr/>
+    
+    <!-- EL Manipulando exibição com rendered e ajax -->
+    <h:form id="form">
+        <b>Nome: </b> <h:outputText value="#{umNomeMaluco.estudante.nome}" /> <br />
+        <b>Sobrenome: </b> <h:outputText value="#{umNomeMaluco.estudante.sobrenome}" /> <br />
+        <b>Turno: </b> <h:outputText value="#{umNomeMaluco.estudante.turno}" /> <br />
+        
+        <h:commandButton value="Exibir notas">
+            <f:ajax render="pgNotas" listener="#{umNomeMaluco.exibirNotas}" />
+        </h:commandButton> 
+
+        <h:commandButton value="Esconder notas">
+            <f:ajax render="pgNotas" listener="#{umNomeMaluco.esconderNotas}" />
+        </h:commandButton> <br />
+
+        <h:panelGroup id="pgNotas">
+            <h:outputText value="#{umNomeMaluco.mostrarNotas}" /> <br />
+            <b>Nota 1: </b> <h:outputText value="#{umNomeMaluco.estudante.nota1}" rendered="#{umNomeMaluco.mostrarNotas}" /> <br />
+            <b>Nota 2: </b> <h:outputText value="#{umNomeMaluco.estudante.nota2}" rendered="#{umNomeMaluco.mostrarNotas}" /> <br />
+            <b>Nota 3: </b> <h:outputText value="#{umNomeMaluco.estudante.nota3}" rendered="#{umNomeMaluco.mostrarNotas}" /> <br />
+        </h:panelGroup>
+        <br/>
+        
+        <h:commandButton value="Exibir Link">
+            <f:ajax render="pgLink" listener="#{umNomeMaluco.exibirLink}" />
+        </h:commandButton> 
+
+        <h:commandButton value="Esconder Link">
+            <f:ajax render="pgLink" listener="#{umNomeMaluco.esconderLink}" />
+        </h:commandButton> 
+        
+        <h:panelGroup id="pgLink">
+            <ui:fragment id="fragmentLink" rendered="#{umNomeMaluco.mostrarLink}">
+                <a href="http://www.google.com.br" target="_blank">Google</a>
+            </ui:fragment>
+        </h:panelGroup>
+    </h:form>
+    
 </h:body>
 
 </html>
