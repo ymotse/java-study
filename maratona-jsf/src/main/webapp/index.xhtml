@@ -99,6 +99,26 @@
         <h:commandButton value="Ir para proxima pagina" 
             action="#{umNomeMaluco.irParaIndex2()}" />
     </h:form>
+    <hr />
+    
+    <!-- Imprimir CSS com EL -->
+    <ui:repeat var="nome" value="#{umNomeMaluco.nomesList}" varStatus="status">
+        <h:outputLabel value="#{nome}" style="color: #{status.index mod 2 == 0 ? 'red' : 'green'}" /> <br />
+    </ui:repeat>
+    <br />
+    
+    <h:commandButton value="Soltar magia" onclick="fazMagica('Hadouken!')" /> <br />
+    <h:commandButton value="Alert nome" onclick="fazMagica('#{umNomeMaluco.estudante.nome}')" /> <br />
+    
+    <script>
+    	function fazMagica(magica) {
+    		alert(magica)
+    	}
+    	
+    	function alertNome(nome) {
+    		alert(nome)
+    	}
+    </script>
     
 </h:body>
 
