@@ -13,7 +13,7 @@
 
 <h:body>
     <h:form>
-        <h:outputText value="#{testeRequestBean.personagemSelecionado}" /> <br/>
+        <h:outputText value="#{testeApplicationBean.categoriaList}" /> <br/>
         <h:commandButton actionListener="#{testeRequestBean.selecionarPersonagem()}" 
             value="Selecionar Personagem" /> <br />
             
@@ -22,6 +22,9 @@
 
         <h:commandButton actionListener="#{testeRequestBean.selecionarPersonagem()}" 
             value="Selecionar Personagem Redirect" action="index2?faces-redirect=true" /> <br />
+
+        <h:commandButton actionListener="#{testeApplicationBean.mudarLista()}" 
+            value="Mudar lista ApplicationBean" /> <br />
     </h:form>
 </h:body>
 
