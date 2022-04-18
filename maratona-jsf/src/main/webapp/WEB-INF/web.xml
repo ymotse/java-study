@@ -7,7 +7,7 @@
     <load-on-startup>1</load-on-startup>
   </servlet>
   <welcome-file-list>
-  	<welcome-file>view.xhtml</welcome-file>
+  	<welcome-file>conversation.xhtml</welcome-file>
   </welcome-file-list>
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
@@ -20,4 +20,7 @@
   <session-config>
     <session-timeout>20</session-timeout>
   </session-config>
+  <error-page>
+    <location>/error.xhtml?faces-redirect=true</location>
+  </error-page>
 </web-app>
