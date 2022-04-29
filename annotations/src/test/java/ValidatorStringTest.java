@@ -25,6 +25,15 @@ class ValidatorStringTest {
 		private String requiredString;
 	}
 
+	@Data
+	@AllArgsConstructor
+	static class PersonTestGender {
+
+		@ValidateString(minLength = 1, possibleValue = {"F", "M"})
+		private String gender;
+	}
+
+
 	@Test
 	@DisplayName("ValidatorString isValid does not throw when successful")
 	void isValid_doesNotThrow_whenSuccessful() {
@@ -41,4 +50,22 @@ class ValidatorStringTest {
 			() -> validator.validate(new PersonTest("tes"))
 		);
 	}
+
+	@Test
+	@DisplayName("ValidatorString isValid does not throw when PossibleValue is right")
+	void isValid_doesNotThrow_whenPossibleValueIsRight() {
+		final Set<ConstraintViolation<PersonTestGender>> constraintViolations = validator.validate(new PersonTestGender("F"));
+
+		assertTrue(constraintViolations.isEmpty());
+	}
+
+	@Test
+	@DisplayName("ValidatorString isValid throws Exception when PossibleValue is wrong")
+	void isValid_throwsException_whenPossibleValueIsWrong() {
+		assertThrows(
+			ValidationException.class,
+			() -> validator.validate(new PersonTestGender("A"))
+		);
+	}
+
 }

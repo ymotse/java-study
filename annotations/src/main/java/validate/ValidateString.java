@@ -20,4 +20,6 @@ public @interface ValidateString {
 	Class<? extends Payload>[] payload() default {};
 
 	int minLength();
+
+	String[] possibleValue() default {};
 }
